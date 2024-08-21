@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyajul Hasan Leon's Interactive Daily Schedule</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #daySelector {
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        #scheduleOutput {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reyajul Hasan Leon's Interactive Daily Schedule</h1>
+    
+    <div id="daySelector">
+        <select id="daySelect">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+        </select>
+        <button onclick="showSchedule()">Show Schedule</button>
+    </div>
+
+    <div id="scheduleOutput"></div>
+
+    <script>
+        const schedule = {
+            Monday: [
+                { time: "9:20 - 10:10", activity: "MAP 5601: Intro to Financial Math", location: "Love 231" },
+                { time: "10:40 - 11:30", activity: "MAD 5403: FCM I", location: "Love 106" },
+                { time: "1:20 - 2:35", activity: "MAC2233 Lect 8 (TA Duty)", location: "104MOR" },
+                { time: "6:35 - 7:25", activity: "MAT 5939-02: Fin Math Proseminar", location: "Love" }
+            ],
+            Tuesday: [
+                { time: "11:35 - 12:50", activity: "STA 6346: Advanced Probability & Inference", location: "OSB 110" },
+                { time: "3:05 - 4:20", activity: "MAT 5939-01: Fin Math Proseminar", location: "Love 105" },
+                { time: "4:50 - 6:05", activity: "MAC1140 Lect 21 (TA Duty)", location: "2100HWC" }
+            ],
+            Wednesday: [
+                { time: "8:00 - 8:50", activity: "MAC1140 Lab 13 (TA Duty)", location: "114HTL" },
+                { time: "9:20 - 10:10", activity: "MAP 5601: Intro to Financial Math", location: "Love 231" },
+                { time: "10:40 - 11:30", activity: "MAD 5403: FCM I", location: "Love 106" },
+                { time: "1:20 - 2:10", activity: "MAC1140 Lab 26 (TA Duty)", location: "107MCH" },
+                { time: "3:05 - 3:55", activity: "MAC1140 Lab 27 (TA Duty)", location: "107MCH" }
+            ],
+            Thursday: [
+                { time: "11:35 - 12:50", activity: "STA 6346: Advanced Probability & Inference", location: "OSB 110" },
+                { time: "1:00 - 2:00", activity: "Office Hours", location: "TBA" }
+            ],
+            Friday: [
+                { time: "8:00 - 8:50", activity: "MAC2233 Lab 10 (TA Duty)", location: "105HTL" },
+                { time: "9:20 - 10:10", activity: "MAP 5601: Intro to Financial Math", location: "Love 231" },
+                { time: "10:40 - 11:30", activity: "MAD 5403: FCM I", location: "Love 106" },
+                { time: "12:00 - 12:50", activity: "MAC2233 Lab 15 (TA Duty)", location: "104HTL" },
+                { time: "1:20 - 2:10", activity: "MAC2233 Lab 17 (TA Duty)", location: "104HTL" },
+                { time: "3:00 - 4:00", activity: "Office Hours", location: "TBA" }
+            ]
+        };
+
+        function showSchedule() {
+            const day = document.getElementById('daySelect').value;
+            const output = document.getElementById('scheduleOutput');
+            const daySchedule = schedule[day];
+
+            if (daySchedule && daySchedule.length > 0) {
+                let scheduleHTML = `<h2>Schedule for ${day}</h2><table>`;
+                scheduleHTML += '<tr><th>Time</th><th>Activity</th><th>Location</th></tr>';
+                
+                daySchedule.forEach(item => {
+                    scheduleHTML += `<tr><td>${item.time}</td><td>${item.activity}</td><td>${item.location}</td></tr>`;
+                });
+                
+                scheduleHTML += '</table>';
+                output.innerHTML = scheduleHTML;
+            } else {
+                output.innerHTML = `<p>No scheduled activities for ${day}.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
